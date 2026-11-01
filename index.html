@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080b0e" />
+    <meta name="description" content="One Minute Before Midnight — a playable horror mystery about the sixty seconds between waking and being found." />
+    <title>One Minute Before Midnight</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="One Minute Before Midnight home">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span>OBSIDIAN <i>STORIES</i></span>
+        </a>
+        <div class="topbar-right">
+          <span class="status-label"><span class="status-dot"></span> NIGHT <b id="night-number">01</b></span>
+          <button class="icon-button sound-toggle" id="sound-toggle" aria-label="Toggle ambient sound" title="Toggle ambient sound">
+            <svg class="sound-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6l-5 4H4Z"/><path d="M16 9a5 5 0 0 1 0 6M18.5 6.5a9 9 0 0 1 0 11"/></svg>
+            <svg class="sound-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6l-5 4H4Z"/><path d="m17 9 5 6m0-6-5 6"/></svg>
+          </button>
+          <button class="icon-button" id="help-button" aria-label="How to play" title="How to play"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.8 9a2.3 2.3 0 1 1 3.8 1.7c-1 .8-1.6 1.1-1.6 2.3M12 16.5v.1"/></svg></button>
+        </div>
+      </header>
+
+      <section class="game-layout" aria-label="Game">
+        <div class="scene-column">
+          <div class="scene-frame" id="scene-frame">
+            <div class="scene-image" id="scene-image"></div>
+            <div class="scene-vignette"></div>
+            <div class="scene-grain"></div>
+            <div class="scene-topline">
+              <div class="location-tag"><span class="tiny-cross">✳</span> <span id="location-name">THE GUEST ROOM</span></div>
+              <div class="scene-coordinates" id="room-time">11:59 PM&nbsp; · &nbsp;UNKNOWN ADDRESS</div>
+            </div>
+            <div class="light-beam"></div>
+            <div class="hotspot-layer" id="hotspot-layer" aria-label="Room objects">
+              <button class="hotspot hotspot-bed" data-target="bed" aria-label="Search bedside table"><span class="hotspot-pulse"></span><span class="hotspot-label">BEDSIDE</span></button>
+              <button class="hotspot hotspot-desk" data-target="desk" aria-label="Inspect writing desk"><span class="hotspot-pulse"></span><span class="hotspot-label">WRITING DESK</span></button>
+              <button class="hotspot hotspot-wardrobe" data-target="wardrobe" aria-label="Look inside the wardrobe"><span class="hotspot-pulse"></span><span class="hotspot-label">WARDROBE</span></button>
+              <button class="hotspot hotspot-door" data-target="door" aria-label="Try the exit door"><span class="hotspot-pulse"></span><span class="hotspot-label">EXIT</span></button>
+            </div>
+            <div class="threat-alert" id="threat-alert"><span class="alert-icon">!</span><span>IT HEARD THAT</span></div>
+            <div class="scene-bottomline">
+              <div class="scene-caption"><span class="caption-dot"></span><span id="scene-caption">The room smells of wet earth. Somewhere, a clock is counting down.</span></div>
+              <div class="scene-controls"><span class="move-hint">TAP AN OBJECT TO INVESTIGATE</span></div>
+            </div>
+            <div class="intro-card" id="intro-card">
+              <div class="intro-eyebrow"><span class="eyebrow-line"></span> AN INTERACTIVE NIGHTMARE</div>
+              <h1>One minute<br />before <em>midnight.</em></h1>
+              <p>You wake in a room you don't remember. Something is already looking for you.</p>
+              <button class="primary-button" id="begin-button"><span>WAKE UP</span><span class="button-arrow">↗</span></button>
+              <div class="intro-foot"><span>HEADPHONES RECOMMENDED</span><span>⏱&nbsp; 60 SECONDS</span></div>
+            </div>
+            <div class="scene-fade" id="scene-fade"></div>
+          </div>
+          <div class="scene-underbar">
+            <div class="quote-mark">“</div><p id="story-line">At 11:59, the house remembers you.</p>
+            <div class="underbar-right"><span class="evidence-count" id="evidence-count">0 <i>/ 5</i> FRAGMENTS</span><span class="run-label">RUN <b id="run-number">01</b></span></div>
+          </div>
+        </div>
+
+        <aside class="status-panel" aria-label="Survival status">
+          <div class="panel-heading"><span>YOUR LAST MINUTE</span><span class="live-indicator">LIVE</span></div>
+          <div class="clock-card" id="clock-card">
+            <div class="clock-label">TIME UNTIL MIDNIGHT <span>LOCAL TIME</span></div>
+            <div class="clock-readout"><span id="timer">01:00</span><span class="clock-needle">↘</span></div>
+            <div class="timer-track"><div id="timer-progress"></div></div>
+            <div class="clock-foot"><span>11:59 PM</span><span>DON'T LET IT FIND YOU</span></div>
+          </div>
+
+          <div class="objective-block">
+            <div class="section-kicker">TONIGHT'S OBJECTIVE <span class="objective-icon">⌁</span></div>
+            <div class="objective-title" id="objective-title">Find a way out.</div>
+            <p id="objective-copy">Search quietly. The exit is locked, and you have one minute before the clock strikes twelve.</p>
+          </div>
+
+          <div class="inventory-block">
+            <div class="section-kicker">POCKET INVENTORY <span class="item-count" id="item-count">0 / 3</span></div>
+            <div class="inventory-slots" id="inventory-slots">
+              <div class="inventory-slot empty"><span>＋</span></div><div class="inventory-slot empty"><span>＋</span></div><div class="inventory-slot empty"><span>＋</span></div>
+            </div>
+          </div>
+
+          <div class="evidence-block">
+            <div class="section-kicker">WHAT YOU REMEMBER <span class="evidence-icon">◌</span></div>
+            <div class="evidence-list" id="evidence-list"><div class="evidence-empty">No memories yet.<br />Look closer.</div></div>
+          </div>
+
+          <div class="danger-block">
+            <div class="danger-head"><span>IT'S GETTING CLOSER</span><span id="danger-level">QUIET</span></div>
+            <div class="danger-track"><div id="danger-progress"></div><span></span><span></span><span></span><span></span></div>
+            <p id="danger-copy">Move carefully. Some things hear more than they see.</p>
+          </div>
+          <div class="panel-footer"><span>✳&nbsp; EVERY ROOM IS DIFFERENT</span><span>V. 1.0.0</span></div>
+        </aside>
+      </section>
+      <footer class="page-footer"><span>AN OBSCURA HOUSE EXPERIENCE</span><span>THE HOUSE IS LISTENING <i>·</i> PLAY QUIETLY</span></footer>
+    </main>
+    <div class="modal-backdrop" id="modal-backdrop" aria-hidden="true"><section class="event-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" id="modal-close" aria-label="Close">×</button><div class="modal-kicker" id="modal-kicker">OBJECT FOUND</div><h2 id="modal-title">A shape in the dark</h2><p id="modal-copy"></p><div class="modal-content" id="modal-content"></div><div class="modal-actions" id="modal-actions"></div></section></div>
+    <script src="game.js"></script>
+  </body>
+</html>
